@@ -2,7 +2,7 @@ import { ApplyOptions } from '@sapphire/decorators';
 import { Command, Args, CommandOptions } from '@sapphire/framework';
 import { Message, MessageEmbed } from 'discord.js';
 import { envParseArray } from '../../lib/env-parser';
-import { capitalise, removeDuplicates } from '../../Utils/Utils';
+import { capitalise, removeDuplicates } from '../../lib/utils';
 
 const OWNERS = envParseArray('OWNERS');
 

@@ -1,0 +1,44 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Polls {
+  id Int @id @default(autoincrement())
+  topic String
+  description String
+  author String
+  dislikes Int @default(0)
+  likes Int @default(0)
+  messageId String
+}
+
+model Moderation {
+  id Int @id @default(autoincrement())
+  offenderId String
+  moderatorId String
+  messageId String?
+  reason String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  type ModerationType
+}
+
+
+enum ModerationType {
+  Warn
+  Kick
+  Mute
+  Timeout
+  Ban
+  Softban
+  Unmute
+  Unban
+}

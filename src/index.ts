@@ -1,5 +1,6 @@
 import './lib/setup';
 import { LogLevel, SapphireClient } from '@sapphire/framework';
+import { PrismaClient } from '@prisma/client';
 
 const client = new SapphireClient({
 	defaultPrefix: '?',
@@ -25,7 +26,12 @@ const client = new SapphireClient({
 });
 
 const main = async () => {
+	const prisma = new PrismaClient();
 	try {
+		await prisma
+			.$connect()
+			.then(() => console.log('Connected to database...'))
+			.catch((err) => client.logger.error('Failed to connect ' + err));
 		client.logger.info('Logging in');
 		await client.login();
 		client.logger.info('logged in');
